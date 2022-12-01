@@ -3,7 +3,10 @@ import Header from './Header'
 import Dummy from './Dummy'
 import SolutionLetters from './SolutionLetters'
 import ErrorLetters from './ErrorLetters'
-
+import Footer from './Footer'
+import Instructions from './Instructions'
+import Options from './Options'
+import { Route, Routes } from 'react-router-dom';
 
 // api
 import getWordFromApi from '../services/api';
@@ -12,6 +15,7 @@ import '../styles/App.scss';
 
 
 import '../styles/Form.scss';
+
 
 
 function App() {
@@ -67,8 +71,13 @@ function App() {
   return (
     <div className='page'>
       <Header/>
+     
       <main className='main'>
-        <section>
+      <Routes>
+        <Route
+        path='/'
+        element={
+          <section>
           <SolutionLetters word={word} userLetters={userLetters}/>
          <ErrorLetters  word={word} userLetters={userLetters}/>
           <form className='form' onSubmit={handleSubmit}>
@@ -89,8 +98,14 @@ function App() {
             />
           </form>
         </section>
+        }
+      ></Route>
+      <Route  path='/instructions' element={<Instructions/>}></Route>
+      <Route  path='/options' element={<Options/>}></Route>
+      </Routes>
         <Dummy numberOfErrors={getNumberOfErrors()}/>
       </main>
+      <Footer/>
     </div>
   );
 }
