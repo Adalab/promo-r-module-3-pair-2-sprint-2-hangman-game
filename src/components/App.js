@@ -3,15 +3,11 @@ import Header from './Header'
 import Dummy from './Dummy'
 import SolutionLetters from './SolutionLetters'
 import ErrorLetters from './ErrorLetters'
-<<<<<<< HEAD
 import Footer from './Footer'
 import Instructions from './Instructions'
 import Options from './Options'
 import { Route, Routes } from 'react-router-dom';
-=======
 import Form from './Form'
-
->>>>>>> 90ff84fcf89ad17b54a732a50f42ef296a330cdc
 
 // api
 import getWordFromApi from '../services/api';
@@ -67,7 +63,7 @@ function App() {
         element={
           <section>
           <SolutionLetters word={word} userLetters={userLetters}/>
-         <ErrorLetters  word={word} userLetters={userLetters}/>
+          <ErrorLetters  word={word} userLetters={userLetters}/>
           <Form lastLetter={lastLetter} handleLastLetter={handleLastLetter} />
         </section>
         }
