@@ -6,6 +6,7 @@ import ErrorLetters from './ErrorLetters'
 import Footer from './Footer'
 import Instructions from './Instructions'
 import Options from './Options'
+import Loading from './Loading'
 import { Route, Routes } from 'react-router-dom';
 import Form from './Form'
 
@@ -24,15 +25,24 @@ function App() {
   const [userLetters, setUserLetters] = useState([]);
   const [lastLetter, setLastLetter] = useState('');
 
+  const [isLoading, setIsLoading] = useState();
+  
+
   useEffect(() => {
+    setIsLoading(true);
     getWordFromApi().then((word) => {
       setWord(word);
     });
+    setIsLoading(false);
   }, []);
 
   // events
 
-
+  const updateInput = (word) =>{
+    setWord(word);
+    setUserLetters([]);
+    setLastLetter('');
+  }
 
 
   const getNumberOfErrors = () => {
@@ -57,6 +67,7 @@ function App() {
       <Header/>
      
       <main className='main'>
+        <Loading loading='loading' isLoading={isLoading} />
       <Routes>
         <Route
         path='/'
@@ -69,7 +80,7 @@ function App() {
         }
       ></Route>
       <Route  path='/instructions' element={<Instructions/>}></Route>
-      <Route  path='/options' element={<Options/>}></Route>
+      <Route  path='/options' element={<Options updateInput={updateInput} word={word}/>}></Route>
       </Routes>
         <Dummy numberOfErrors={getNumberOfErrors()}/>
       </main>
